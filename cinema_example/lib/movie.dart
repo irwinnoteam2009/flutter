@@ -1,11 +1,11 @@
+import 'package:cinema_example/movieDetail.dart';
 import 'package:flutter/material.dart';
 
 class Genre {
   final String name;
 
   Genre(this.name);
-  Genre.fromJSON(Map<String, dynamic> json):
-    name = json['name'];
+  Genre.fromJSON(Map<String, dynamic> json) : name = json['name'];
 }
 
 class Movie {
@@ -21,7 +21,7 @@ class Movie {
   String video;
   double voteAvg;
   int voteCount;
-  final List<Genre> genres = List();
+  List<Genre> genres;
 
   Movie.fromJSON(Map<String, dynamic> json) {
     id = json['id'];
@@ -36,19 +36,14 @@ class Movie {
     video = json['video'];
     voteAvg = json['vote_average'];
     voteCount = json['vote_count'];
-    if (json['genres'] != null) {
-      json['genres'].forEach((v) {
-        genres.add(Genre.fromJSON(v));
-      });
-    }
+    if (json['genres'] != null) json['genres'].map<Genre>((json) => Genre.fromJSON(json)).toList();
   }
 }
 
 class MoviesList extends StatelessWidget {
   final List<Movie> movies;
-  final void Function(Movie) onTap;
 
-  MoviesList({Key key, this.movies, this.onTap});
+  MoviesList({Key key, this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +53,17 @@ class MoviesList extends StatelessWidget {
         return Container(
           height: 60.0,
           child: ListTile(
-            title: Text(movies[index].title),
-            leading: Image.network(movies[index].posterPath, fit: BoxFit.cover,),
-            onTap: () {
-              onTap(movies[index]);
-            },
-          ),
+              title: Text(movies[index].title),
+              leading: Image.network(
+                movies[index].posterPath,
+                fit: BoxFit.cover,
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return MovieDetail(movies[index]);
+                }));
+              }),
         );
       },
     );

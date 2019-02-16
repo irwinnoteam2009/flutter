@@ -1,5 +1,4 @@
 import 'package:cinema_example/movie.dart';
-import 'package:cinema_example/movieDetail.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -45,18 +44,10 @@ class _HomePageState extends State<HomePage> {
       body: FutureBuilder(
         future: fetchMovies(http.Client(), 'https://gist.githubusercontent.com/irwinnoteam2009/b74bb8e7785275696d77002bbdedc80a/raw/adac09d873ba02e8419210abb8f1673a565a5223/cinema.json'),
         builder: (context, snapshot) {
-          if (snapshot.hasError) return Text(snapshot.error);
+          if (snapshot.hasError) return Text(snapshot.error.toString());
 
           return snapshot.hasData 
-            ? MoviesList(movies: snapshot.data, onTap: (movie) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return MovieDetail(movie);
-                  }
-                )
-              );
-            },)
+            ? MoviesList(movies: snapshot.data)
             : Center(child: CircularProgressIndicator());
         },
       ),
