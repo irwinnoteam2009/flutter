@@ -36,7 +36,8 @@ class Movie {
     video = json['video'];
     voteAvg = json['vote_average'];
     voteCount = json['vote_count'];
-    if (json['genres'] != null) json['genres'].map<Genre>((json) => Genre.fromJSON(json)).toList();
+    if (json['genres'] != null)
+      json['genres'].map<Genre>((json) => Genre.fromJSON(json)).toList();
   }
 }
 
@@ -59,8 +60,7 @@ class MoviesList extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
                   return MovieDetail(movies[index]);
                 }));
               }),

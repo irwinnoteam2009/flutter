@@ -7,14 +7,16 @@ class Poster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-        tag: 'poster',
-        child: Image.network(
-          url,
-          fit: BoxFit.cover,
-          height: double.infinity,
-          width: double.infinity,
-          alignment: Alignment.center,
-        ));
+    return SafeArea(
+      child: Hero(
+          tag: 'poster',
+          child: Image.network(
+            url,
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+            alignment: Alignment.center,
+          )),
+    );
   }
 }
