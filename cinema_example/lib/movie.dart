@@ -1,4 +1,4 @@
-import 'package:cinema_example/movieDetail.dart';
+import 'package:cinema_example/detail.dart';
 import 'package:flutter/material.dart';
 
 class Genre {
