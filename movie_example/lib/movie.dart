@@ -21,7 +21,7 @@ class Movie {
   String video;
   double voteAvg;
   int voteCount;
-  List<Genre> genres;
+  List<Genre> genres = List();
 
   Movie.fromJSON(Map<String, dynamic> json) {
     id = json['id'];
@@ -36,8 +36,12 @@ class Movie {
     video = json['video'];
     voteAvg = json['vote_average'];
     voteCount = json['vote_count'];
-    if (json['genres'] != null)
-      json['genres'].map<Genre>((json) => Genre.fromJSON(json)).toList();
+    if (json['genres'] != null) {
+      List<Genre> data =
+          json['genres'].map<Genre>((jsn) => Genre.fromJSON(jsn)).toList();
+      print(data.map((it) => it.name).toList().join(","));
+      genres.addAll(data);
+    }
   }
 }
 
@@ -48,7 +52,10 @@ class MoviesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black26,
+      ),
       itemCount: movies.length,
       itemBuilder: (context, index) {
         return Container(
