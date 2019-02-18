@@ -38,10 +38,7 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Chewie(
-      controller: _chewieController,
-    ));
+    return Container(child: Chewie(controller: _chewieController));
   }
 }
 
@@ -55,57 +52,61 @@ class MovieDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text("Movie!"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                _movie.title,
-                style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  _movie.title,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8),
-              child: Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(_movie.originalTitle),
               ),
-            ),
-            Row(
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return Poster(_movie.posterPath);
-                    }));
-                  },
-                  child: Container(
-                    height: 200,
-                    child: Hero(
-                      tag: 'poster',
-                      child:
-                          Image.network(_movie.posterPath, fit: BoxFit.cover),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.only(top: 8.0),
-              child: Column(
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return Poster(_movie.posterPath);
+                        }));
+                      },
+                      child: Container(
+                        height: 200,
+                        child: Hero(
+                          tag: 'poster',
+                          child:
+                              Image.network(_movie.posterPath, fit: BoxFit.cover),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(_movie.overview),
-                  Container(height: 200, child: VideoWidget(_movie.video)),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      height: 200.0,
+                      child: VideoWidget(_movie.video)),
+                  ),
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
