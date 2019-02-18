@@ -1,51 +1,53 @@
 import 'package:flutter/material.dart';
-// import 'package:chewie/chewie.dart';
+import 'package:chewie/chewie.dart';
+import 'package:video_player/video_player.dart';
 
-import 'package:cinema_example/movie.dart';
-import 'package:cinema_example/poster.dart';
+import 'package:movie_example/movie.dart';
+import 'package:movie_example/poster.dart';
 
-// class VideoWidget extends StatefulWidget {
-//   final String url;
+class VideoWidget extends StatefulWidget {
+  final String url;
 
-//   VideoWidget(this.url);
+  VideoWidget(this.url);
 
-//   @override
-//   _VideoWidgetState createState() => _VideoWidgetState();
-// }
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
 
-// class _VideoWidgetState extends State<VideoWidget> {
-//   VideoPlayerController _controller;
-//   ChewieController _chewieController;
+class _VideoWidgetState extends State<VideoWidget> {
+  VideoPlayerController _controller;
+  ChewieController _chewieController;
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.network(widget.url);
-//     _chewieController =ChewieController(
-//       videoPlayerController: _controller,
-//       aspectRatio: _controller.value.aspectRatio,
-//       autoPlay: true,
-//     );
-//   }
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget.url);
+    _chewieController = ChewieController(
+      videoPlayerController: _controller,
+      aspectRatio: _controller.value.aspectRatio,
+      autoPlay: true,
+    );
+  }
 
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     _controller.dispose();
-//     _chewieController.dispose();
-//   }
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _chewieController.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         child: Chewie(controller: _chewieController,)
-//       );
-//     }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Chewie(
+      controller: _chewieController,
+    ));
+  }
+}
 
 class MovieDetail extends StatelessWidget {
   final Movie _movie;
-  MovieDetail(this._movie); 
+  MovieDetail(this._movie);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,8 @@ class MovieDetail extends StatelessWidget {
                     height: 200,
                     child: Hero(
                       tag: 'poster',
-                      child: Image.network(_movie.posterPath, fit: BoxFit.cover),
+                      child:
+                          Image.network(_movie.posterPath, fit: BoxFit.cover),
                     ),
                   ),
                 )
@@ -98,7 +101,7 @@ class MovieDetail extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(_movie.overview),
-                  // VideoWidget(widget._movie.video),
+                  Container(height: 200, child: VideoWidget(_movie.video)),
                 ],
               ),
             )

@@ -1,4 +1,4 @@
-import 'package:cinema_example/movie.dart';
+import 'package:movie_example/movie.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 Future<List<Movie>> fetchMovies(http.Client client, String url) async {
-  final response =await client.get(url);
+  final response = await client.get(url);
   return compute(parseMovies, response.body);
 }
 
@@ -42,13 +42,14 @@ class _HomePageState extends State<HomePage> {
         title: Text('Cinema example'),
       ),
       body: FutureBuilder(
-        future: fetchMovies(http.Client(), 'https://gist.githubusercontent.com/irwinnoteam2009/b74bb8e7785275696d77002bbdedc80a/raw/adac09d873ba02e8419210abb8f1673a565a5223/cinema.json'),
+        future: fetchMovies(http.Client(),
+            'https://gist.githubusercontent.com/irwinnoteam2009/b74bb8e7785275696d77002bbdedc80a/raw/adac09d873ba02e8419210abb8f1673a565a5223/cinema.json'),
         builder: (context, snapshot) {
           if (snapshot.hasError) return Text(snapshot.error.toString());
 
-          return snapshot.hasData 
-            ? MoviesList(movies: snapshot.data)
-            : Center(child: CircularProgressIndicator());
+          return snapshot.hasData
+              ? MoviesList(movies: snapshot.data)
+              : Center(child: CircularProgressIndicator());
         },
       ),
     );

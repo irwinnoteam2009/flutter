@@ -1,6 +1,6 @@
-# cinema_example
+# movie_example
 
-A new Flutter project.
+A new Flutter application.
 
 ## Getting Started
 

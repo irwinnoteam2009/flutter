@@ -1,5 +1,5 @@
-name: cinema_example
-description: A new Flutter project.
+name: movie_example
+description: A new Flutter application.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -21,7 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   http: ^0.12.0+1
-  # chewie: ^0.9.5
+  chewie: ^0.9.5
 
 dev_dependencies:
   flutter_test:

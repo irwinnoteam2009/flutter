@@ -1,4 +1,4 @@
-package com.example.cinemaexample;
+package com.hellb0ys.movieexample;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
