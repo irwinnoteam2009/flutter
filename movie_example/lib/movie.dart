@@ -55,9 +55,12 @@ class MoviesList extends StatelessWidget {
           height: 60.0,
           child: ListTile(
               title: Text(movies[index].title),
-              leading: Image.network(
-                movies[index].posterPath,
-                fit: BoxFit.cover,
+              leading: Hero(
+                tag: 'movie_${movies[index].id}',
+                child: Image.network(
+                  movies[index].posterPath,
+                  fit: BoxFit.cover,
+                ),
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {

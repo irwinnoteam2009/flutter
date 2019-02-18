@@ -81,12 +81,15 @@ class MovieDetail extends StatelessWidget {
                           return Poster(_movie.posterPath);
                         }));
                       },
-                      child: Container(
-                        height: 200,
-                        child: Hero(
-                          tag: 'poster',
-                          child:
-                              Image.network(_movie.posterPath, fit: BoxFit.cover),
+                      child: Hero(
+                        tag: 'movie_${_movie.id}',
+                        child: Container(
+                          height: 200,
+                          child: Hero(
+                            tag: 'poster',
+                            child: Image.network(_movie.posterPath,
+                                fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                     )
@@ -100,8 +103,7 @@ class MovieDetail extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Container(
-                      height: 200.0,
-                      child: VideoWidget(_movie.video)),
+                        height: 200.0, child: VideoWidget(_movie.video)),
                   ),
                 ],
               )
