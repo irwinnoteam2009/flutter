@@ -1,6 +1,12 @@
 import 'package:movie_example/detail.dart';
 import 'package:flutter/material.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+
 class Genre {
   final String name;
 
@@ -43,6 +49,16 @@ class Movie {
       genres.addAll(data);
     }
   }
+}
+
+Future<List<Movie>> fetchMovies(http.Client client, String url) async {
+  final response = await client.get(url);
+  return compute(parseMovies, response.body);
+}
+
+List<Movie> parseMovies(String response) {
+  final parsed = convert.jsonDecode(response);
+  return parsed['results'].map<Movie>((json) => Movie.fromJSON(json)).toList();
 }
 
 class MoviesList extends StatelessWidget {
