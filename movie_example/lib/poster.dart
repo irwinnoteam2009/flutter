@@ -12,7 +12,7 @@ class Poster extends StatelessWidget {
           tag: 'poster',
           child: Image.network(
             url,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             height: double.infinity,
             width: double.infinity,
             alignment: Alignment.center,
