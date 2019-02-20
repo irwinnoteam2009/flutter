@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
+import 'package:intl/intl.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:movie_example/movie.dart';
@@ -30,7 +31,7 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   void dispose() {
-    super.dispose();
+    super.dispose(); 
     _controller.dispose();
     _chewieController.dispose();
   }
@@ -46,6 +47,7 @@ class MovieDetail extends StatelessWidget {
   MovieDetail(this._movie);
 
   Widget itemInfo(String key, value) => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             key,
@@ -55,10 +57,7 @@ class MovieDetail extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Text(
-            value,
-            textAlign: TextAlign.end,
-          )
+          Text(value)
         ],
       );
 
@@ -113,10 +112,10 @@ class MovieDetail extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          itemInfo('Release:', '${_movie.releaseAt.year}-${_movie.releaseAt.month}-${_movie.releaseAt.day}'),
+                          itemInfo('Release:', DateFormat('yyyy-MM-dd').format(_movie.releaseAt)),
                           itemInfo('Popularity:', _movie.popularity.toString()),
                           itemInfo('Vote:', '${_movie.voteAvg} (${_movie.voteCount})'),
-                          itemInfo('Genre:', _movie.genres.map((it) => it.name).toList().join(",")),
+                          itemInfo('Genre:', _movie.genres.map((it) => it.name).toList().join("\n")),
                         ],
                       ),
                     )

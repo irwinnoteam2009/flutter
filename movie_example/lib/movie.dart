@@ -42,12 +42,8 @@ class Movie {
     video = json['video'];
     voteAvg = json['vote_average'];
     voteCount = json['vote_count'];
-    if (json['genres'] != null) {
-      List<Genre> data =
-          json['genres'].map<Genre>((jsn) => Genre.fromJSON(jsn)).toList();
-      print(data.map((it) => it.name).toList().join(","));
-      genres.addAll(data);
-    }
+    if (json['genres'] != null) this.genres .addAll(json['genres'].map<Genre>((jsn) => Genre.fromJSON(jsn)).toList());
+    if (json['genre_ids'] != null) this.genres .addAll(json['genre_ids'].map<Genre>((jsn) => Genre.fromJSON(jsn)).toList());
   }
 }
 
